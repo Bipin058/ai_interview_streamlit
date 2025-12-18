@@ -47,7 +47,14 @@ if st.button("Submit"):
         if response.status_code == 400:
            st.error("A user with this email already exists.")
         if response.status_code == 200:
-            st.success("User saved successfully! Email sent.")
+            st.success("User saved successfully!")
+            st.markdown("---")
+            st.subheader("Next Steps - Interview Process")
+            st.markdown("""
+            1. **Check your email** - You will receive an email with interview details
+            2. **Get interview link and password** - The email contains your unique interview link and password
+            3. **Visit the link and login** - Click the link and use the password to start your interview
+            """)
         else:
             st.error("Error saving user")
             st.write(response.text)
