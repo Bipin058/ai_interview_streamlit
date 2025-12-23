@@ -26,10 +26,10 @@ if uploaded_pdf is not None:
                     text += page.extract_text() + "\n"
 
             resume_extracted = text.replace("\x00", "").replace("\r", "").strip()
-
+            full_resume = f"Name: {name}\n\nResume Text: {resume_extracted}"
             st.success("PDF extracted successfully!")
             st.subheader("Extracted Resume Text Preview:")
-            st.text_area("Resume Extracted Text", resume_extracted[:1000], height=200)  # Show first 1000 chars
+            st.text_area("Resume Extracted Text", full_resume[:1000], height=200)  # Show first 1000 chars
 
         except Exception as e:
             st.error(f"Error extracting PDF: {e}")
@@ -41,7 +41,7 @@ if st.button("Submit"):
         payload = {
             "name": name,
             "email": email,
-            "resume_extracted": resume_extracted
+            "resume_extracted": full_resume
         }
 
         response = requests.post(API_URL, json=payload)
